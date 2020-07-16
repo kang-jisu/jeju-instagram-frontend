@@ -55,11 +55,12 @@ class Insert extends Component {
                 
                 <div className="main-content">
                 <form >
-                    <input type="file" id="file" name="imagesList" multiple onChange={this.handleFilesChange} hidden/>
                     <div className="form-wrapper">
                         <div className="image-div">
-
-                            {String(this.state.imagesList.length)} 
+                            {this.props.imagesList.map(image=>{
+                                return (<h1 key={image.name}>{image.name}</h1>)
+                            })}
+                            {String(this.props.imagesList.length)} 
                         </div>
                         <div className="text-div">
                             <textarea name="description" value={this.state.description} onChange={this.handleTextChange}/>
