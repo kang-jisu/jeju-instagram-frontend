@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster&display=swap);
+   
+/* 페이지 헤더 */
+.header{
+    top: 0px;
+    border-bottom: 1px solid #efefef;
+  }
+  
+.header-logo{
+    font-family: 'Lobster',cursive;
+    font-size: 25px;
+}
+
+.header-logo:hover{
+    cursor: pointer;
+    color: navy;
+}
+
+.form-wrapper{
+    width: 100%;
+    display: inline-block;
+}
+
+.image-div{
+    position: relative;
+    padding-top: 100%;
+    background-color: #FCF5F5;
+}
+
+.text-div{
+    position: relative;
+    width: 100%;
+}
+
+.text-div>textarea{
+    padding:1%;
+    resize: vertical;
+    width: 98%;
+    min-height: 30vh;
+    max-height: 300px;
+    outline:none;
+    border: 0px;
+}
+@media screen and (min-width: 601px) {
+    .main-content>div{
+        margin-left:30%;
+        margin-right:30%;
+    }
+    .form-wrapper{
+        width: 35%;
+        max-width: 900px;
+    }
+    .text-div>textarea{
+        font-size: 19px;
+    }
+  }
+  
+  

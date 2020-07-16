@@ -1,21 +1,55 @@
+a{
+  color:black;
+  text-decoration: none;
+}
+
 .App {
   text-align: center;
-  background-color: gray;
+}
+
+/* 스크롤 부드럽게  */
+html {
+  scroll-behavior: smooth;
 }
 
 .main{
   min-height: 100vh;
+  margin-top:51px;
+  margin-bottom: 51px;
+  background-color: #fafafa;
 }
 
-.menu-bar{
-  display: block;
+.nav-bar{
+  display: flex;
   position: fixed;
-  bottom: 0px;
   right: 0px;
   left:0px;
-  border-top: 1px solid #efefef;
   height:50px;
+  width: 100%;
+  background-color: white;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
 }
+
+.nav-block{
+  flex:1;
+}
+
+.link-block{
+  height: 100%;
+}
+
+.link-block>a{
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.link-block>a:active{
+  background-color:#efefef;
+}
+
 
 @media screen and (min-width: 601px) {
   .App {

@@ -1,13 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import Feed from '../pages/Feed'
-import Profile from '../pages/Profile';
-import Insert from '../pages/Insert';
-import Detail from '../pages/Detail';
-import MenuBar from '../components/MenuBar';
-
+import {Feed,Profile,Insert,Detail} from '../pages';
+import {MenuBar,InsertMenuBar} from '../components';
 class Main extends Component {
+
     render() {
         return (
             <div >
@@ -19,7 +16,10 @@ class Main extends Component {
                     <Route path="/" component={Feed}/>
                     </Switch>
                 </section>
-                <MenuBar></MenuBar>
+                <Switch>
+                    <Route path="/insert" component={InsertMenuBar}/>
+                    <Route component={MenuBar}/>
+                </Switch>
             </div>
         );
     }
