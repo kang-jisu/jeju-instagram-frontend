@@ -21,10 +21,45 @@
     display: inline-block;
 }
 
-.image-div{
+.image-div, .carousel{
     position: relative;
     padding-top: 100%;
-    background-color: #FCF5F5;
+    overflow: hidden;
+    background-color: white;
+    border-bottom: 1px solid #efefef;
+}
+.image-div>.image, .carousel-inner{
+    position: absolute !important;
+    top: 0 !important; 
+    left: 0 !important; 
+    right: 0 !important; 
+    bottom: 0 !important; 
+    /* -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%) !important; */
+}
+.carousel-item{
+    position: absolute !important;
+    top: 0 !important; 
+    left: 0 !important; 
+    right: 0 !important; 
+    bottom: 0 !important; 
+    -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%) !important;
+
+}
+.view{
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    object-fit: cover;
+    -webkit-transform: translate(-50%,-50%); 
+    -ms-transform: translate(-50%,-50%); 
+    transform: translate(-50%,-50%);
+    width: 100%;
+}
+
+.img{
+    width: 100%;
 }
 
 .text-div{
@@ -35,7 +70,7 @@
 .text-div>textarea{
     padding:1%;
     resize: vertical;
-    width: 98%;
+    width: 100%;
     min-height: 30vh;
     max-height: 300px;
     outline:none;
