@@ -4,7 +4,7 @@ import {Route, Switch,withRouter} from 'react-router-dom';
 import {Feed,Profile,Insert,Detail} from '../pages';
 import {MenuBar,InsertMenuBar} from '../components';
 
-const maxFileNumber = 3; // 인스타 한 게시글에 올릴 수 있는 파일 개수 . 일단 3개정도로만 해둠
+const maxFileNumber = 5; // 인스타 한 게시글에 올릴 수 있는 파일 개수 . 일단 3개정도로만 해둠
 class Main extends Component {
     constructor(props){
         super(props);
@@ -23,7 +23,7 @@ class Main extends Component {
         }
         if(this.state.selectedFiles!==prevState.selectedFiles){
             if(this.state.selectedFiles.length!==0){ 
-                console.log("Add버튼 눌리고 파일도 선택됨");
+                // console.log("Add버튼 눌리고 파일도 선택됨");
                 this.props.history.push("/insert");
             }
         }
