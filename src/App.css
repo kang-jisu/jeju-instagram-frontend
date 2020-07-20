@@ -1,7 +1,10 @@
 a{
-  color:black;
+  /* color:black !important; */
   text-decoration: none;
 }
+/* a:hover{ */
+  /* color:navy !important; */
+/* } */
 
 .App {
   text-align: center;
@@ -12,6 +15,9 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  box-shadow: none !important;
+}
 .font-smaller{
   font-size: 0.9rem;
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView } from
 "mdbreact";
 
+import "./board.css";
 const Carousel = function(props){
     return (
         <MDBCarousel
@@ -10,6 +11,7 @@ const Carousel = function(props){
         length={props.length}
         showControls={true}
         showIndicators={true}
+        className="card-img-top"
     >
         <MDBCarouselInner>
         {

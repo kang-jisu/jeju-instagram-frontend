@@ -1,17 +1,25 @@
 {
-    "boards":[
+  "boards": [
     {
-        "board_id": 33,
-        "nickname" : "boyun",
-        "content": "땅스타그램 ㅎㅇㅎㅇ",
-        "image_url": ["https://bit.ly/2CkGs6H","https://bit.ly/397eGq4","https://bit.ly/3fBBVva"],
-        "review_date": "2020-07-18"
+      "id": 33,
+      "nickname": "boyun",
+      "content": "땅스타그램 ㅎㅇㅎㅇ",
+      "image_url": [
+        "https://bit.ly/2CkGs6H",
+        "https://bit.ly/397eGq4",
+        "https://bit.ly/3fBBVva"
+      ],
+      "review_date": "2020-07-18"
     },
     {
-        "board_id": 12,
-        "nickname" : "97js_",
-        "content": "졸귀",
-        "image_url": ["https://bit.ly/3eCLQ2b","https://bit.ly/3eCLQ2b"],
-        "review_date": "2020-07-10"
+      "id": 12,
+      "nickname": "97js_",
+      "content": "졸귀",
+      "image_url": [
+        "https://bit.ly/3eCLQ2b",
+        "https://bit.ly/3eCLQ2b"
+      ],
+      "review_date": "2020-07-10"
     }
-]}
+  ]
+}
