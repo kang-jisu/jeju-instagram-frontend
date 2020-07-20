@@ -9,29 +9,22 @@ const maxFileNumber = 5; // 인스타 한 게시글에 올릴 수 있는 파일 
 function Main(props) {
 
     const [selectedFiles, setSelectedFiles] = useState([]);
-    const refreshPage=()=>{
-        if(props.location.pathname==="/"){
-            return "feed"
-        }
-        // 게시글 등록중에 새로고침되면 메인화면으로 나가짐 (파일 리셋돼서) 
-        else if(props.location.pathname==="/insert" && selectedFiles.length===0){ 
-            props.history.push("/");
-            return "feed"
-        }
-        else if(props.location.pathname==="/profile"){
-            return "profile"
-        }
-        else {
-            return "detail"
-        }
-    }
-    const [page, setPage] = useState(refreshPage);
+    const [page, setPage] = useState("feed");
 
     useEffect( ()=>{
-        if(props.location.pathname==="/insert" && selectedFiles.length===0){ 
+        if(props.location.pathname==="/"){
+            setPage("feed");
+        }
+        else if(props.location.pathname==="/insert" && selectedFiles.length===0){ 
             // 사진 선택 페이지에서 새로고침해서 selectedFileds가 초기화됐을경우 메인페이지로 돌아감 
             props.history.push("/");
             setPage("feed");
+        }
+        else if(props.location.pathname.match("/board")){
+            setPage("detail");
+        }
+        else {
+            setPage("profile");
         }
     },[props.location.pathname,selectedFiles,props.history]);
 
@@ -41,6 +34,13 @@ function Main(props) {
             props.history.push("/insert");
         }
     },[selectedFiles,props.history]);
+
+    const successInsert=()=>{
+        alert("등록되었습니다!");
+        props.history.push("/");
+        setSelectedFiles([]);
+        setPage("feed");
+    }
 
     const changePage=(page)=>{
         setPage(page);
@@ -64,8 +64,8 @@ function Main(props) {
         <section className="main">
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
             <Switch>
-            <Route path="/insert" render={props=>{ return(<Insert imagesList={selectedFiles}/>)}}/>
-            <Route path="/sboard/:boardId" component={Detail}/>
+            <Route path="/insert" render={props=>{ return(<Insert imagesList={selectedFiles} successInsert={successInsert}/>)}}/>
+            <Route path="/board/:boardId" component={Detail}/>
             <Route path="/:nickname" component={Profile}/>
             <Route path="/" component={Feed}/>
             </Switch>

@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import {Carousel} from '../components';
+import jAPI from '../jejuAPIs/JejuAPIs';
 
 
 function Insert(props) {
@@ -27,12 +28,46 @@ function Insert(props) {
     }
 
     const insertForm=(e)=>{
-        alert(String(props.imagesList.length)+content);
-    
-        // axios -> [POST] /boards 
-        // 성공하면 
-        // this.props.history.push("/")
-        // 실패 
+        // mock으로 테스트할때는 raw로
+        // const formData = new FormData();
+        // formData.append("nickname","kangjisu");
+        // formData.append("content",content);
+        // for(let i=0; i<props.imagesList.length; i++){
+        //     formData.append("imagesList",imagesList[i]);
+        // }
+        // formData.append("review_date","2020-07-30");
+        // jAPI.post("/boards",formData)
+        // .then(res=>{
+        //     console.log(String(props.imagesList.length)+content+"성공");
+        // })
+        // .catch(error=>{
+        //     console.log("실패"+error.response);
+        // })
+
+        jAPI({
+            method: 'post',
+            url: '/boards',
+            header: {
+                'Content-Type': 'multipart/form-data',
+            },
+            data: {
+                nickname: 'kangjisu',
+                content: content,
+                image_url: previewList,
+                review_date : '2020-08-01'
+            }
+        })
+        .then(res=>{
+            console.log(String(props.imagesList.length)+content+"성공");
+            props.successInsert();
+        })
+        .catch(error=>{
+            console.log("실패");
+            console.log(error);
+            // 실패했을때 dialog 띄우기 
+        })
+        
+
     }
 
     const renderInsertButton=(text)=>{
