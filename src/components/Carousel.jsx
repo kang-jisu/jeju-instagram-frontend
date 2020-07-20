@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from
+import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView } from
 "mdbreact";
 
 const Carousel = function(props){
@@ -15,12 +15,12 @@ const Carousel = function(props){
         {
             props.map((url,index)=>{
                 return(
-                    <MDBCarouselItem itemId={index+1}>
+                    <MDBCarouselItem itemId={index+1} key={index+1}>
                     <MDBView>
                     <img
                         className="img"
                         src={url}
-                        alt="image"
+                        alt="board"
                     />
                     </MDBView>
                     </MDBCarouselItem>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Main} from './layout';
+import {Main} from './container';
 import ScrollToTop from './ScrollToTop';
 
 function App() {
