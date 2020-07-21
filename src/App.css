@@ -1,5 +1,5 @@
 a{
-  /* color:black !important; */
+  /* color:#ffa726 !important; */
   text-decoration: none;
 }
 /* a:hover{ */
@@ -26,9 +26,12 @@ html {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
+.sign-form{
+  background-color: white;
+}
 .main{
   min-height: 100vh;
   margin-top:51px;
@@ -115,9 +118,19 @@ html {
     background-color: white;
   }
 
-.font-smaller{
-  font-size: 1rem;
-}
+  .font-smaller{
+    font-size: 1rem;
+  }
+  
+  .sign{
+    margin-top: 10rem;
+  }
+  .sign-form{
+    border: 1px solid lightgray;
+  }
+  .sign-form>.title-text{
+    padding-top: 3rem;
+  }
 
 }
 

@@ -7,34 +7,34 @@ import ScrollToTop from './ScrollToTop';
 function App(props) {
   const [auth, setAuth] = useState(false);
 
-  useEffect( ()=>{
-    if(!window.location.pathname.match("sign") && auth){
-      const token = window.localStorage.getItem("accessToken");
-      if(token===null){
-        props.history.push('/sign');
-        console.log("토큰 존재 X 로그아웃 ");
-        setAuth(false);
-      }
-      // 토큰 유효 X 검사
-    }
-    else{
-      const token = window.localStorage.getItem("accessToken");
-      if(token!==null){
-        props.history.push('/');
-        setAuth(true);
-      }
-    }
-  },[auth,props.history]);
+  // useEffect( ()=>{
+  //   if(!window.location.pathname.match("sign")){
+  //     const token = window.localStorage.getItem("accessToken");
+  //     if(token===null){
+  //       props.history.push('/sign');
+  //       console.log("토큰 존재 X 로그아웃 ");
+  //       setAuth(false);
+  //     }
+  //     // 토큰 유효 X 검사
+  //   }
+  //   else{
+  //     const token = window.localStorage.getItem("accessToken");
+  //     if(token!==null){
+  //       props.history.push('/');
+  //       setAuth(true);
+  //     }
+  //   }
+  // },[auth,props.history]);
 
   return (
     <ScrollToTop>
     <div className="App">
       <Switch>
         <Route path="/sign" component={Sign}/>
-        <Route 
-        render={auth?
+        <Route path="/" component={Main}/>
+        {/* render={auth?
                 props=>{ return(<Main auth={auth}/>)}
-               :props=>{ return(<Sign/>)}}/>
+               :props=>{ return(<Sign/>)}}/> */}
       </Switch>
     </div>
     </ScrollToTop>

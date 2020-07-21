@@ -12,11 +12,11 @@ function Main(props) {
     const [page, setPage] = useState("feed");
 
     ////// 로그인 권한 검증 -> 아니면 로그아웃 시킬 거  /////////
-    useEffect( ()=>{
-        if(window.localStorage.getItem("accessToken")===null){
-            props.history.push('/sign');
-        }
-    });
+    // useEffect( ()=>{
+    //     if(window.localStorage.getItem("accessToken")===null){
+    //         props.history.push('/sign');
+    //     }
+    // });
     ////////////////////////////////////////////////
     
     useEffect( ()=>{
@@ -68,7 +68,7 @@ function Main(props) {
     }
     return (
         <>
-        {props.auth?(  // 로그아웃된상태에서는 unmount시키려고 추가함 
+        {/* {props.auth?(  // 로그아웃된상태에서는 unmount시키려고 추가함  */}
         <div >
         <section className="main">
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
@@ -84,7 +84,7 @@ function Main(props) {
             <Route render={props=>{ return(<MenuBar changePage={changePage} page={page} clickAddButton={clickAddButton}/>)}}/>
         </Switch>
         </div>
-        ):null}
+        {/* ):null} */}
         </>
     );
 }

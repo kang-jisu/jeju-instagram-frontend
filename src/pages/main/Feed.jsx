@@ -53,7 +53,7 @@ function Feed(props) {
             </div>
         </div>
         <div className="main-content">
-            {boardsList.map(board=>{
+            {boardsList.reverse().map(board=>{
                 return(
                     <Board board={board} key={board.id}/>
                 )
