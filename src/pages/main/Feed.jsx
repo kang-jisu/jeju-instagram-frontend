@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import './pages.css';
-import {Board} from '../components';
-import jAPI from '../jejuAPIs/JejuAPIs';
+import {Board} from '../../components/main';
+import jAPI from '../../jejuAPIs/JejuAPIs';
 
 const test= [
     {

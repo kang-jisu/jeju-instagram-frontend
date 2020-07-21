@@ -1,7 +1,7 @@
 import React, { useEffect ,useState} from 'react';
-import jAPI from '../jejuAPIs/JejuAPIs';
+import jAPI from '../../jejuAPIs/JejuAPIs';
 import {Link} from 'react-router-dom';
-import {Board,BoardWeb} from '../components';
+import {Board,BoardWeb} from '../../components/main';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 function Detail(props) {
     const changeScreenMode=()=>{
