@@ -21,5 +21,19 @@
       "review_date": "2020-07-22",
       "id": 12
     }
+  ],
+  "users": [
+    {
+      "id": "97js_",
+      "nickname": "97js_",
+      "name": "강지수",
+      "email": "w97ww@naver.com"
+    },
+    {
+      "id": "boyun",
+      "nickname": "boyun",
+      "name": "보요미",
+      "email": "boyun@naver.com"
+    }
   ]
 }

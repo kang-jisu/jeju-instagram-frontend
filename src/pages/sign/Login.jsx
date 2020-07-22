@@ -1,33 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
+import { Form, FormGroup, Label, Input} from 'reactstrap';
+
+const TRUE = 1;
+const FALSE = 0;
+const NULL = -1;
+
 function Login(props) {
+    const [user, setUser] = useState({email:'',password:''});
+    const [userValid, setUserValid] = useState({email:NULL,password:NULL})
+    const [denied, setDenied] = useState(false);
+
+    const handleChange=(e)=>{
+        setUser({
+            ...user,
+            [e.target.name]:e.target.value
+        })
+        if(e.target.value!=="")
+        setUserValid({
+            ...userValid,
+            [e.target.name]:TRUE
+        });       
+    }
+
+    const checkInput=()=>{
+        // 이메일이 입력되지 않았을 때
+        if(user.email===""){
+            document.getElementById("email").focus();
+            setUserValid({
+                ...userValid,
+                email:FALSE
+            })
+        }
+        // 비밀번호가 입력되지 않았을 때
+        else if(user.password===""){
+            document.getElementById("password").focus();
+            setUserValid({
+                ...userValid,
+                password:FALSE
+            })
+        }
+        // 둘다 입력 됨 -> 로그인 요청 
+        else requestLogin();
+    }
+
+    const requestLogin=()=>{
+        // axios 요청 할 부분
+        let httpStatus = 200;
+
+        switch(httpStatus){
+            case 200:
+                login();
+                break;
+            case 404:
+                setDenied(true);
+                break;
+            default:
+                break;
+        }
+    }
+
     const login=()=>{
-        window.localStorage.setItem("accessToken","Zz");
         props.history.push("/");
     }
     return (
         <div className="container"  >
         <div className="row justify-content-center"> 
-        <form className="text-center p-5 col-lg-4 col-md-auto sign-form" action="#!">
+        <Form className="text-left p-5 col-lg-4 col-md-auto sign-form">
             <p className="h4 mb-4 title-text" >로그인</p>
-        
-            <input type="email" className="form-control mb-4" placeholder="이메일" autoComplete="off"/>
-        
-            <input type="password" className="form-control mb-4" placeholder="비밀번호" autoComplete="off"/>
-        
-            <div className="d-flex justify-content-around">
-                <div>
-                    <Link to="#">비밀번호를 잊으셨나요?</Link>
-                </div>
+            
+            <FormGroup >
+                <Label for="exampleEmail">이메일</Label>
+                <Input 
+                 name="email"
+                 id="email"
+                 onChange={handleChange}
+                 invalid={userValid.email===FALSE?true:false}
+                />
+            </FormGroup>
+            <FormGroup>
+                <Label for="exampleEmail">비밀번호</Label>
+                <Input 
+                 name="password"
+                 id="password"
+                 onChange={handleChange}
+                 invalid={userValid.password===FALSE?true:false}
+                />
+            </FormGroup>
+            <div className="text-center">
+                <Link to="#">비밀번호를 잊으셨나요?</Link>
             </div>
-            <button className="btn btn-info btn-block my-4 " onClick={login}>로그인</button>
-        
-            <p>계정이 없으신가요?
-                <Link to="/sign/up" >가입하기</Link>
-            </p>
+            <button type="button" className={`btn ${!denied?"btn-info":"btn-danger"} btn-block my-4`} onClick={checkInput}>로그인</button>
+            
+            {denied? // 로그인 거부 메세지 ( 비번/이메일 안맞아서 )
+            <div className="text-center text-danger mb-3">
+                <small><b>잘못된 입력입니다. <br/>이메일 또는 비밀번호를 다시 확인하여주세요.</b></small>
+            </div>
+            :null}
 
-        </form>
+            <div className="text-center">계정이 없으신가요?
+                <Link to="/sign/up" >가입하기</Link>
+            </div>
+        </Form>
+
         </div>
         </div>
     );
