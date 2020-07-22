@@ -12,9 +12,9 @@ function Login(props) {
         <form className="text-center p-5 col-lg-4 col-md-auto sign-form" action="#!">
             <p className="h4 mb-4 title-text" >로그인</p>
         
-            <input type="email" className="form-control mb-4" placeholder="이메일"/>
+            <input type="email" className="form-control mb-4" placeholder="이메일" autoComplete="off"/>
         
-            <input type="password" className="form-control mb-4" placeholder="비밀번호"/>
+            <input type="password" className="form-control mb-4" placeholder="비밀번호" autoComplete="off"/>
         
             <div className="d-flex justify-content-around">
                 <div>

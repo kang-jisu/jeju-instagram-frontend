@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import {Carousel} from '../../components/main';
+import {Carousel,FailDialog} from '../../components/main';
 import jAPI from '../../jejuAPIs/JejuAPIs';
 
 import Backdrop from '@material-ui/core/Backdrop';
@@ -20,6 +20,7 @@ function Insert(props) {
     // backdrop material-ui
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [openFail,setOpenFail] = useState(false);
 
     // main code 
     const setPreviewList = () =>{
@@ -35,6 +36,7 @@ function Insert(props) {
     const [previewList] = useState(setPreviewList);
 
     const goBack=()=>{
+        // TODO 알아보기 ==> 뒤로가기하면 한번 더 전송되는거같기도하고 ,, /?
         props.history.goBack();
     }
 
@@ -73,15 +75,14 @@ function Insert(props) {
             }
         })
         .then(res=>{
-            console.log(String(props.imagesList.length)+content+"성공");
             setOpen(false);
             props.successInsert();
         })
         .catch(error=>{
             setOpen(false);
-            console.log("실패");
+            setOpenFail(true);
+            setTimeout(()=>setOpenFail(false),1000);
             console.log(error);
-            // 실패했을때 dialog 띄우기 
         })
         
 
@@ -100,6 +101,10 @@ function Insert(props) {
 
     return (
         <Fragment>
+            <FailDialog
+            open={openFail}
+            failState="등록"
+            />
             <Backdrop className={classes.backdrop} open={open}>
             <span>
                 <CircularProgress color="inherit" /> <br/>

@@ -30,17 +30,20 @@ function Feed(props) {
     const [boardsList,setBoardsList] = useState([]);
 
     useEffect(()=>{
+        getRequest();
+    },[]);
+
+    const getRequest=()=>{
         jAPI.get("/boards")
         .then(res=>{
-            setBoardsList(res.data);
+            setBoardsList(res.data.reverse());
         })
         .catch(error=>{
             // console.log("서버 오류 dialog 추가")
             console.log("목업서버 실행 X")
             setBoardsList(test);
         })
-    },[]);
-
+    }
     const scrollToTop=()=>{
         window.scrollTo(0,0);
     }
@@ -53,9 +56,9 @@ function Feed(props) {
             </div>
         </div>
         <div className="main-content">
-            {boardsList.reverse().map(board=>{
+            {boardsList.map(board=>{
                 return(
-                    <Board board={board} key={board.id}/>
+                    <Board board={board} key={board.id} refresh={getRequest}/>
                 )
             })}
          </div>

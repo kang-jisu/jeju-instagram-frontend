@@ -7,3 +7,6 @@ export { default as BoardWeb} from "./BoardWeb";
 export { default as BoardHeader} from "./BoardHeader";
 export { default as BoardBody} from "./BoardBody";
 export { default as BoardWebBody} from "./BoardWebBody";
+export { default as DetailBtn} from "./DetailBtn";
+export { default as BoardDialog} from "./BoardDialog";
+export { default as FailDialog} from "./FailDialog";

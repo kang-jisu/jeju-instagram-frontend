@@ -1,5 +1,5 @@
 import React, {useState,useEffect } from 'react';
-import {Route, Switch,withRouter} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import {Feed,Profile,Insert,Detail} from '../pages/main';
 import {MenuBar,InsertMenuBar} from '../components/main';
@@ -11,14 +11,6 @@ function Main(props) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [page, setPage] = useState("feed");
 
-    ////// 로그인 권한 검증 -> 아니면 로그아웃 시킬 거  /////////
-    // useEffect( ()=>{
-    //     if(window.localStorage.getItem("accessToken")===null){
-    //         props.history.push('/sign');
-    //     }
-    // });
-    ////////////////////////////////////////////////
-    
     useEffect( ()=>{
         if(props.location.pathname==="/"){
             setPage("feed");
@@ -45,7 +37,7 @@ function Main(props) {
 
     const successInsert=()=>{
         // alert("등록되었습니다!");
-        props.history.push("/");
+        props.history.replace("/");
         setSelectedFiles([]);
         setPage("feed");
     }
@@ -68,7 +60,6 @@ function Main(props) {
     }
     return (
         <>
-        {/* {props.auth?(  // 로그아웃된상태에서는 unmount시키려고 추가함  */}
         <div >
         <section className="main">
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
@@ -84,9 +75,8 @@ function Main(props) {
             <Route render={props=>{ return(<MenuBar changePage={changePage} page={page} clickAddButton={clickAddButton}/>)}}/>
         </Switch>
         </div>
-        {/* ):null} */}
         </>
     );
 }
 
-export default withRouter(Main);
+export default Main;

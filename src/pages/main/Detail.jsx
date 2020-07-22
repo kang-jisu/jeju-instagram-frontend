@@ -27,6 +27,7 @@ function Detail(props) {
 
     useEffect( ()=>{
         window.addEventListener('resize',handleResizeEvent);
+        return ()=>{window.removeEventListener('resize',handleResizeEvent);}
     });
 
     const handleResizeEvent=()=>{
