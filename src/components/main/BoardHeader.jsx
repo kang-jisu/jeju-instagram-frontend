@@ -84,7 +84,7 @@ function BoardHeader(props) {
          openDelete={openDelete}
          openBackDrop={openBackDrop}
          handleClickOpen={handleClickOpen}
-         hanldeClose={handleClose}
+         handleClose={handleClose}
          handleUpdate={()=>handleUpdate(props.board.id)}
          handleDeleteDialog={handleDeleteDialog}
          handleDeleteClose={handleDeleteClose}
