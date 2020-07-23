@@ -82,6 +82,7 @@ function Login(props) {
             <FormGroup>
                 <Label for="exampleEmail">비밀번호</Label>
                 <Input 
+                 type="password"
                  name="password"
                  id="password"
                  onChange={handleChange}

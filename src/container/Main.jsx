@@ -1,7 +1,7 @@
 import React, {useState,useEffect } from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import {Feed,Profile,Insert,Detail,Update} from '../pages/main';
+import {Feed,Profile,Insert,Detail,Update,Edit} from '../pages/main';
 import {MenuBar,InsertMenuBar} from '../components/main';
 
 const maxFileNumber = 5; // 인스타 한 게시글에 올릴 수 있는 파일 개수 . 일단 3개정도로만 해둠
@@ -64,6 +64,7 @@ function Main(props) {
         <section className="main">
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
             <Switch>
+            <Route path="/edit" component={Edit}/>
             <Route path="/update/:boardId" component={Update}/>
             <Route path="/insert" render={props=>{ return(<Insert imagesList={selectedFiles} successInsert={successInsert}/>)}}/>
             <Route path="/board/:boardId" component={Detail}/>

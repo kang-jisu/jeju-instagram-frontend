@@ -30,7 +30,7 @@ function Profile(props) {
     }
 
     const handleProfileUpdate=()=>{
-        console.log(props.match.params.nickname);
+        props.history.push("/edit");
     }
     
     return (
