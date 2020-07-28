@@ -1,6 +1,7 @@
 import React from 'react';
-import {Route,Switch,Link} from 'react-router-dom';
+import {Route,Switch,Link,withRouter} from 'react-router-dom';
 import {EditInfo} from '../../components/sign';
+import withLogin from '../../hoc/withLogin';
 
 function Edit(props) {
     const goBack=()=>{
@@ -32,4 +33,4 @@ function Edit(props) {
     );
 }
 
-export default Edit;
+export default withLogin(withRouter(Edit));

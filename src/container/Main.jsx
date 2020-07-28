@@ -1,10 +1,9 @@
 import React, {useState,useEffect } from 'react';
-import {Route, Switch,withRouter} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import {Feed,Profile,Insert,Detail,Update,Edit} from '../pages/main';
 import {MenuBar,InsertMenuBar} from '../components/main';
 import LoggedContext from '../context/LoggedContext';
-import withLogin from '../hoc/withLogin';
 const maxFileNumber = 5; // 인스타 한 게시글에 올릴 수 있는 파일 개수 . 일단 3개정도로만 해둠
 
 function Main(props) {
@@ -84,4 +83,4 @@ function Main(props) {
     );
 }
 
-export default withLogin(withRouter(Main));
+export default Main;

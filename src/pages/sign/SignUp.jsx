@@ -25,10 +25,10 @@ function SignUp(props) {
         jAPI({
             method: 'post',
             url: '/users',
-            header: {
-                'Content-Type': 'multipart/form-data',
-            },
-            data: user
+            data: user,
+            // headers: {
+            //     'Content-Type': 'multipart/form-data',
+            // },
         })
         .then(res=>{
             console.log("성공");

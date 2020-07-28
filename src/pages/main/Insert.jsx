@@ -24,7 +24,6 @@ function Insert(props) {
 
     // main code 
     const setPreviewList = () =>{
-
         let previewList =  [];
         for(let i =0; i<props.imagesList.length; i++){
             previewList.push(String(URL.createObjectURL(props.imagesList[i])))
@@ -47,11 +46,12 @@ function Insert(props) {
     const insertForm=(e)=>{
         // mock으로 테스트할때는 raw로
         // const formData = new FormData();
-        // formData.append("nickname","kangjisu");
+        // formData.append("nickname",window.localStorage.getItem("accessToken"));
         // formData.append("content",content);
         // for(let i=0; i<props.imagesList.length; i++){
         //     formData.append("imagesList",imagesList[i]);
         // }
+        // formData.append('image_url',previewList);
         // formData.append("review_date","2020-07-30");
         // jAPI.post("/boards",formData)
         // .then(res=>{
@@ -63,16 +63,16 @@ function Insert(props) {
         setOpen(true);
         jAPI({
             method: 'post',
-            url: '/boards',
-            header: {
-                'Content-Type': 'multipart/form-data',
-            },
-            data: {
+            url: '/posts',
+            data:{
                 nickname: 'kangjisu',
                 content: content,
                 image_url: previewList,
                 review_date : '2020-08-01'
-            }
+            },
+            // headers: {
+            //     'Content-Type': 'multipart/form-data',
+            // },
         })
         .then(res=>{
             setOpen(false);

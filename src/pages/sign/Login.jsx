@@ -51,7 +51,7 @@ function Login(props) {
 
         switch(httpStatus){
             case 200:
-                login("accessToken");
+                login(user.email);
                 break;
             case 404:
                 setDenied(true);
@@ -63,7 +63,7 @@ function Login(props) {
 
     const login=(accessToken)=>{
         window.localStorage.setItem("accessToken",accessToken);
-        props.onLogin();
+        props.onLogin(accessToken);
         props.history.push("/");
     }
     return (

@@ -25,7 +25,7 @@ function Update(props) {
     const [board, setBoard] = useState({});
     
     useEffect(()=>{
-        jAPI.get(`/boards/${props.match.params.boardId}`)
+        jAPI.get(`/posts/${props.match.params.boardId}`)
         .then(res=>{
             console.log(res.data);
             setBoard(res.data);
@@ -48,10 +48,10 @@ function Update(props) {
         setOpen(true);
         jAPI({
             method: 'put',
-            url: `/boards/${props.match.params.boardId}`,
-            header: {
-                'Content-Type': 'multipart/form-data',
-            },
+            url: `/posts/${props.match.params.boardId}`,
+            // headers: {
+            //     'Content-Type': 'multipart/form-data',
+            // },
             data: {
                 nickname: board.nickname,
                 content: board.content,

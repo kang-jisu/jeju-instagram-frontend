@@ -15,7 +15,7 @@ function Detail(props) {
     const [board, setBoard] = useState(null);
 
     useEffect(()=>{
-        jAPI.get(`/boards/${props.match.params.boardId}`)
+        jAPI.get(`/posts/${props.match.params.boardId}`)
         .then(res=>{
             setBoard(res.data);
         })

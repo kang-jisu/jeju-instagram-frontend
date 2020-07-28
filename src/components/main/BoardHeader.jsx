@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {BoardDialog ,FailDialog} from './';
 
 import jAPI from '../../jejuAPIs/JejuAPIs';
+import LoggedContext from '../../context/LoggedContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +75,9 @@ function BoardHeader(props) {
 
   const classes = useStyles();
     return (
-        <>
+        <LoggedContext.Consumer>
+          {logged=>{return(
+            <>
         <FailDialog
         open={openFail}
         failState="삭제"
@@ -92,15 +95,19 @@ function BoardHeader(props) {
         />
         <CardHeader className="bg-white">
              <Link to={{
-                 pathname:`./${props.board.nickname}`,
+                 pathname:`/${props.board.nickname}`,
                  }} className="text-body font-weight-bold text-monospace " >
                  {props.board.nickname}
              </Link>
+             {logged.logged===false?null:
              <IconButton className={classes.menu} onClick={handleClickOpen}>
                 <MenuIcon />
             </IconButton>
+            }
         </CardHeader>
         </>
+        )}}
+        </LoggedContext.Consumer>
     );
 }
 

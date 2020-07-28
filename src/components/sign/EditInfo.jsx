@@ -16,7 +16,6 @@ function EditInfo(props) {
         //axios 현재 로그인중인 사용자 아이디 받아와서 정보 요청 , ,
         jAPI.get(`/users/97js_`)
         .then(res=>{
-            console.log(res.data);
             setUser(res.data);
         })
         .catch(error=>{
@@ -59,13 +58,12 @@ function EditInfo(props) {
         jAPI({
             method: 'put',
             url: `/users/${user.id}`,
-            header: {
-                'Content-Type': 'multipart/form-data',
-            },
+            // headers: {
+            //     'Content-Type': 'multipart/form-data',
+            // },
             data: user
         })
         .then(res=>{
-            console.log("성공");
             props.history.push(`/${user.nickname}`);
         })
         .catch(error=>{

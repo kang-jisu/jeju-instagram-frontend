@@ -8,7 +8,7 @@ const withLogin=(WrappedComponent) =>{
                 {logged=>{
                     if(logged.logged===false){
                         props.history.push("/sign/in");
-                    return <Sign/>
+                        return <Sign/>
                     }
                     else return <WrappedComponent/>
                 }}

@@ -1,14 +1,14 @@
 {
-  "boards": [
+  "posts": [
     {
       "nickname": "boyun",
-      "content": "땅스타그램 ㅎㅇㅎㅇ!!\n엔터",
+      "content": "땅스타그램 ㅎㅇㅎㅇ!!\n엔터z",
       "image_url": [
         "https://bit.ly/2CkGs6H",
         "https://bit.ly/397eGq4",
         "https://bit.ly/3fBBVva"
       ],
-      "review_date": "2020-07-28",
+      "review_date": "2020-07-29",
       "id": 33
     },
     {
@@ -18,7 +18,7 @@
         "https://bit.ly/3eCLQ2b",
         "https://bit.ly/3eCLQ2b"
       ],
-      "review_date": "2020-07-28",
+      "review_date": "2020-07-29",
       "id": 12
     }
   ],

@@ -6,17 +6,16 @@ import ScrollToTop from './ScrollToTop';
 import LoggedContext from './context/LoggedContext';
 function App(props) {
 
-  const onLogin=()=>{
-    console.log("로그인");
-    setLogged(state=>{return{...state,logged:true}});
+  const onLogin=(id)=>{
+    setLogged(state=>{return{...state,logged:true,id:id}});
   }
 
   const onLogout=()=>{
-    console.log("로그아웃");
-    setLogged(state=>{return{...state,logged:false}});
+    setLogged(state=>{return{...state,logged:false,id:null}});
   }
   const initialState={
     logged:window.localStorage.getItem("accessToken")?true:false,
+    id:window.localStorage.getItem("accessToken"),
     onLogin,
     onLogout,
   }
@@ -24,7 +23,7 @@ function App(props) {
 
   useEffect( ()=>{
     if(window.localStorage.getItem("accessToken")){
-      onLogin();
+      onLogin(window.localStorage.getItem("accessToken"));
     }
     else {
       onLogout();

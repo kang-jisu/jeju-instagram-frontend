@@ -1,12 +1,6 @@
 import React, { Fragment ,useEffect, useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import jAPI from '../../jejuAPIs/JejuAPIs';
-const test= {
-      "id": 1,
-      "nickname": "test",
-      "email": "test@gmail.com",
-      "name": "길동"
-};
 
 function Profile(props) {
     const [user, setUser] = useState(null);
@@ -15,14 +9,12 @@ function Profile(props) {
         setMessage("로딩중..");
         jAPI.get(`/users/${props.match.params.nickname}`)
         .then(res=>{
-            console.log(res.data);
             setUser(res.data);
             setMessage("");
         })
         .catch(error=>{
             console.log(error);
             setMessage("해당하는 아이디의 유저를 찾을 수 없습니다.");
-            setUser(test);
         })
     },[props.match.params.nickname]);
     
@@ -61,9 +53,9 @@ function Profile(props) {
             <button className="btn btn-primary" onClick={handleProfileUpdate}>정보 수정</button>
             <button className="btn btn-info " onClick={logout}>로그아웃</button>
             <br/>
-            {message}
             </>
             }
+            {message}
         </div>
 
     </Fragment>
