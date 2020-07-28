@@ -3,7 +3,6 @@ import jAPI from '../jejuAPIs/JejuAPIs';
 
 const WithRequestGet=(props,WrappedComponent)=>{
     const [data, setData] = useState(null);
-
     const initialize=useCallback(()=>{
         jAPI.get(props.url)
         .then(res=>{

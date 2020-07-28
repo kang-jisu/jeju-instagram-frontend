@@ -1,4 +1,5 @@
 import React, { Fragment ,useEffect, useState} from 'react';
+import {withRouter} from 'react-router-dom';
 import jAPI from '../../jejuAPIs/JejuAPIs';
 const test= {
       "id": 1,
@@ -26,6 +27,8 @@ function Profile(props) {
     },[props.match.params.nickname]);
     
     const logout=()=>{
+        window.localStorage.removeItem("accessToken");
+        props.onLogout();
         props.history.push("/sign/in");
     }
 
@@ -67,4 +70,4 @@ function Profile(props) {
     );
 }
 
-export default Profile;
+export default withRouter(Profile);

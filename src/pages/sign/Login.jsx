@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 
 import { Form, FormGroup, Label, Input} from 'reactstrap';
 
@@ -51,7 +51,7 @@ function Login(props) {
 
         switch(httpStatus){
             case 200:
-                login();
+                login("accessToken");
                 break;
             case 404:
                 setDenied(true);
@@ -61,7 +61,9 @@ function Login(props) {
         }
     }
 
-    const login=()=>{
+    const login=(accessToken)=>{
+        window.localStorage.setItem("accessToken",accessToken);
+        props.onLogin();
         props.history.push("/");
     }
     return (
@@ -110,4 +112,4 @@ function Login(props) {
     );
 }
 
-export default Login;
+export default withRouter(Login);

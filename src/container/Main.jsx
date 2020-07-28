@@ -1,9 +1,10 @@
 import React, {useState,useEffect } from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,withRouter} from 'react-router-dom';
 
 import {Feed,Profile,Insert,Detail,Update,Edit} from '../pages/main';
 import {MenuBar,InsertMenuBar} from '../components/main';
-
+import LoggedContext from '../context/LoggedContext';
+import withLogin from '../hoc/withLogin';
 const maxFileNumber = 5; // 인스타 한 게시글에 올릴 수 있는 파일 개수 . 일단 3개정도로만 해둠
 
 function Main(props) {
@@ -59,8 +60,9 @@ function Main(props) {
         document.getElementById("file").click();
     }
     return (
-        <>
-        <div >
+        <LoggedContext.Consumer>
+            {(logged)=>(
+                <>
         <section className="main">
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
             <Switch>
@@ -68,7 +70,7 @@ function Main(props) {
             <Route path="/update/:boardId" component={Update}/>
             <Route path="/insert" render={props=>{ return(<Insert imagesList={selectedFiles} successInsert={successInsert}/>)}}/>
             <Route path="/board/:boardId" component={Detail}/>
-            <Route path="/:nickname" component={Profile}/>
+            <Route path="/:nickname" render={props=>{return(<Profile onLogout={logged.onLogout}/>)}}/>
             <Route path="/" component={Feed}/>
             </Switch>
         </section>
@@ -76,9 +78,10 @@ function Main(props) {
             <Route path="/insert" component={InsertMenuBar}/>
             <Route render={props=>{ return(<MenuBar changePage={changePage} page={page} clickAddButton={clickAddButton}/>)}}/>
         </Switch>
-        </div>
-        </>
+            </>
+            )}
+        </LoggedContext.Consumer>
     );
 }
 
-export default Main;
+export default withLogin(withRouter(Main));

@@ -25,7 +25,9 @@ function BoardBody(props) {
              </Link>
                 </span> 
                  <span className="card-text text-size">
-                     {props.board.content}
+                     {props.board.content.split('\n').map( (line,index) => {
+                    return (<span key={index}>{line}<br/></span>)})
+                     }
                  </span><br/>
              {/* <div className="overflow-auto comment">
                  댓글
