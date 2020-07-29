@@ -8,8 +8,6 @@ import jAPI from '../../jejuAPIs/JejuAPIs';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import moment from 'moment';
-import 'moment/locale/ko';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -31,9 +29,15 @@ function Update(props) {
             setBoard(res.data);
         })
         .catch(error=>{
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
             console.log(error);
         })
-    },[props.match.params.boardId]);
+    },[props.match.params.boardId,props.history]);
 
 
     const goBack=()=>{
@@ -53,10 +57,8 @@ function Update(props) {
             //     'Content-Type': 'multipart/form-data',
             // },
             data: {
-                nickname: board.nickname,
                 content: board.content,
                 image_url: board.image_url,
-                review_date : moment(new Date()).format('YYYY-MM-DD'),
             }
         })
         .then(res=>{
@@ -68,6 +70,20 @@ function Update(props) {
             setOpenFail(true);
             setTimeout(()=>setOpenFail(false),1000);
             console.log(error);
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
+            else if(error.response.status===403){
+                alert('수정 권한이 없는 사용자입니다! 피드로 돌아갑니다.')
+                props.history.push("/");
+            }
+            else {
+            console.log(error);
+            }
+
         })
     }
 

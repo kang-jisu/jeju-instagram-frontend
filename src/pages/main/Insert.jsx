@@ -65,10 +65,8 @@ function Insert(props) {
             method: 'post',
             url: '/posts',
             data:{
-                nickname: 'kangjisu',
                 content: content,
                 image_url: previewList,
-                review_date : '2020-08-01'
             },
             // headers: {
             //     'Content-Type': 'multipart/form-data',
@@ -82,7 +80,15 @@ function Insert(props) {
             setOpen(false);
             setOpenFail(true);
             setTimeout(()=>setOpenFail(false),1000);
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
+            else {
             console.log(error);
+            }
         })
         
 

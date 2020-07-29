@@ -20,6 +20,7 @@ function Profile(props) {
     
     const logout=()=>{
         window.localStorage.removeItem("accessToken");
+        window.localStorage.removeItem("id");
         props.onLogout();
         props.history.push("/sign/in");
     }

@@ -20,10 +20,18 @@ function Detail(props) {
             setBoard(res.data);
         })
         .catch(error=>{
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
+            else{
             console.log(error);
             setMessage("게시글을 불러오는데 실패했습니다.");
+            }
         })
-    },[props.match.params.boardId]);
+    },[props.match.params.boardId,props.history]);
 
     useEffect( ()=>{
         window.addEventListener('resize',handleResizeEvent);

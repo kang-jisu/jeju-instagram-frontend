@@ -9,9 +9,15 @@ const WithRequestGet=(props,WrappedComponent)=>{
             setData(res.data);
         })
         .catch(error=>{
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
             console.log(`${error} with request get ${props.url}`);
         })
-    },[props.url])
+    },[props.url,props.history])
 
     useEffect(()=>{
         initialize();

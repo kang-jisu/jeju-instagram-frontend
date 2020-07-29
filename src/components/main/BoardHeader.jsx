@@ -65,10 +65,20 @@ function BoardHeader(props) {
           props.refresh();
       })
       .catch(error=>{
-          console.log(error.response);
-          setOpenBackDrop(false);
-          setOpenFail(true);
-          setTimeout(()=>setOpenFail(false),1000);
+        console.log(error.response);
+        setOpenBackDrop(false);
+        setOpenFail(true);
+        setTimeout(()=>setOpenFail(false),1000);
+        if(error.response.status===401){
+          alert("알수없는 회원정보. 로그아웃시킴");
+          window.localStorage.removeItem("accessToken");
+          window.localStorage.removeItem("id");
+          props.history.push("/sign/in");
+        }
+        else if(error.response.status===403){
+            alert('삭제 권한이 없는 사용자입니다! 피드로 돌아갑니다.')
+            props.history.push("/");
+        }
       })
   }
 

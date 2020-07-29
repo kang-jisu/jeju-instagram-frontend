@@ -15,7 +15,7 @@ function App(props) {
   }
   const initialState={
     logged:window.localStorage.getItem("accessToken")?true:false,
-    id:window.localStorage.getItem("accessToken"),
+    id:window.localStorage.getItem("id"),
     onLogin,
     onLogout,
   }
@@ -23,7 +23,7 @@ function App(props) {
 
   useEffect( ()=>{
     if(window.localStorage.getItem("accessToken")){
-      onLogin(window.localStorage.getItem("accessToken"));
+      onLogin(window.localStorage.getItem("id"));
     }
     else {
       onLogout();

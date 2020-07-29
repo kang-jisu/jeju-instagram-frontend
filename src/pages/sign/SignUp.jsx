@@ -12,6 +12,7 @@ const EXIST = 2;
 function SignUp(props) {
     const [user, setUser] = useState({email:'',nickname:'',name:'',password:''})
     const [userValid, setUserValid] = useState({email:NULL,nickname:NULL,name:NULL,password:NULL})
+    const [status, setStatus] = useState(200);
 
     const regExp = {
         email:/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/,
@@ -35,7 +36,17 @@ function SignUp(props) {
             props.history.push("/sign/in");
         })
         .catch(error=>{
-            console.log("실패");
+            if(error.response.status===400){
+                // 입력되지 않은 정보가 있을 때 
+                setStatus(400);
+            }
+            else if(error.response.status===404){
+                // 이미 존재하는 아이디 일 때
+                setStatus(404);
+            }
+            else {
+                setStatus(500);
+            }
         })
     }
 
@@ -70,7 +81,8 @@ function SignUp(props) {
         setUser({
             ...user,
             [e.target.name]:e.target.value
-        })
+        });
+        setStatus(200);
         
     }
 
@@ -129,11 +141,16 @@ function SignUp(props) {
             <FormText>8~15자 영문+숫자 조합으로 입력해주세요.</FormText>
             </FormGroup>
             <button 
-             className="btn btn-info btn-block my-4 " 
+             id="submitBtn"
+             className={`btn ${status===200?"btn-info":"btn-danger"} btn-block my-4`}
              onClick={signUp}
              disabled={renderSubmitBtn()}
             >가입하기</button>
-        
+            {status!==200?
+            <p style={{color:"red"}}>
+                {status===400?"입력되지 않은 정보가 있습니다.":status===404?"이미 존재하는 이메일 혹은 닉네임입니다.":"서버와의 연결에 실패했습니다."}
+            </p>
+            :null}
             <div className="text-center">
                 <Link to="/sign/in" className="text-center">로그인하기</Link>
             </div>

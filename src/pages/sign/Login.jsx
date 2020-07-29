@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Link,withRouter} from 'react-router-dom';
-
+import jAPI from '../../jejuAPIs/JejuAPIs';
 import { Form, FormGroup, Label, Input} from 'reactstrap';
 
 const TRUE = 1;
@@ -10,7 +10,7 @@ const NULL = -1;
 function Login(props) {
     const [user, setUser] = useState({email:'',password:''});
     const [userValid, setUserValid] = useState({email:NULL,password:NULL})
-    const [denied, setDenied] = useState(false);
+    const [status, setStatus] = useState(200);
 
     const handleChange=(e)=>{
         setUser({
@@ -22,6 +22,7 @@ function Login(props) {
             ...userValid,
             [e.target.name]:TRUE
         });       
+        setStatus(200);
     }
 
     const checkInput=()=>{
@@ -47,23 +48,31 @@ function Login(props) {
 
     const requestLogin=()=>{
         // axios 요청 할 부분
-        let httpStatus = 200;
-
-        switch(httpStatus){
-            case 200:
-                login(user.email);
-                break;
-            case 404:
-                setDenied(true);
-                break;
-            default:
-                break;
-        }
+        jAPI({
+            method:'post',
+            url:'/login',
+            data:user
+        })
+        .then(res=>{
+            const data = {token:'token',nickname:'97js_'};
+            //login(res.data)로 바꿀것
+            login(data);
+        })
+        .catch(error=>{
+            if(error.response.status===400){
+                // 알 수 없는 정보일 때
+                setStatus(400);
+            }
+            else {
+                setStatus(500);
+            }
+        })
     }
 
-    const login=(accessToken)=>{
-        window.localStorage.setItem("accessToken",accessToken);
-        props.onLogin(accessToken);
+    const login=(data)=>{
+        window.localStorage.setItem("accessToken",data.token);
+        window.localStorage.setItem("id",data.nickname);
+        props.onLogin(data.nickname);
         props.history.push("/");
     }
     return (
@@ -94,11 +103,12 @@ function Login(props) {
             <div className="text-center">
                 <Link to="#">비밀번호를 잊으셨나요?</Link>
             </div>
-            <button type="button" className={`btn ${!denied?"btn-info":"btn-danger"} btn-block my-4`} onClick={checkInput}>로그인</button>
+            <button type="button" className={`btn ${status===200?"btn-info":"btn-danger"} btn-block my-4`} onClick={checkInput}>로그인</button>
             
-            {denied? // 로그인 거부 메세지 ( 비번/이메일 안맞아서 )
+            {status!==200? // 로그인 거부 메세지 ( 비번/이메일 안맞아서 )
             <div className="text-center text-danger mb-3">
-                <small><b>잘못된 입력입니다. <br/>이메일 또는 비밀번호를 다시 확인하여주세요.</b></small>
+                {status===400?<small><b>잘못된 입력입니다. <br/>이메일 또는 비밀번호를 다시 확인하여주세요.</b></small>
+                :<small><b>서버와의 통신이 실패했습니다.</b></small>}
             </div>
             :null}
 
