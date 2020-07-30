@@ -2,52 +2,38 @@ import React, { useState, useEffect } from 'react';
 import {Board} from '.';
 import jAPI from '../../jejuAPIs/JejuAPIs';
 
-const test= [
-    {
-      "id": 33,
-      "nickname": "boyun",
-      "content": "땅스타그램 ㅎㅇㅎㅇ",
-      "image_url": [
-        "https://bit.ly/2CkGs6H",
-        "https://bit.ly/397eGq4",
-        "https://bit.ly/3fBBVva"
-      ],
-      "review_date": "2020-07-18"
-    },
-    {
-      "id": 12,
-      "nickname": "97js_",
-      "content": "졸귀",
-      "image_url": [
-        "https://bit.ly/3eCLQ2b",
-        "https://bit.ly/3eCLQ2b"
-      ],
-      "review_date": "2020-07-10"
-    }
-];
 function BoardsList(props) {
     const [boardsList,setBoardsList] = useState([]);
 
     useEffect(()=>{
-        setBoardsList(props.data.reverse());
+        setBoardsList(props.data);
     },[props.data]);
 
     const getRequest=()=>{
-        jAPI.get("/boards")
+        jAPI.get("/posts")
         .then(res=>{
-            setBoardsList(res.data.reverse());
+            console.log(res.data);
+            setBoardsList(res.data.sort(function(a,b){
+                return parseFloat(b.post_id)-parseFloat(a.post_id);
+            }))
         })
         .catch(error=>{
-            // console.log("서버 오류 dialog 추가")
-            console.log("목업서버 실행 X")
-            setBoardsList(test);
+            if(error.response!==undefined){
+            if(error.response.status===401){
+                alert("알수없는 회원정보. 로그아웃시킴");
+                window.localStorage.removeItem("accessToken");
+                window.localStorage.removeItem("id");
+                props.history.push("/sign/in");
+            }
+            }
+            console.log(error);
         })
     }
     return (
         <>
             {boardsList.map(board=>{
                 return(
-                    <Board board={board} key={board.id} refresh={getRequest}/>
+                    <Board board={board} key={board.post_id} refresh={getRequest}/>
                 )
             })}
         </>

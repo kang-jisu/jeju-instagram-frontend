@@ -57,18 +57,18 @@ function BoardHeader(props) {
   const handleDelete=(id)=>{
       setOpenDelete(false);
       setOpenBackDrop(true);
-
-      jAPI.delete(`/boards/${id}`)
+      jAPI.delete(`/posts/${id}`)
       .then(res=>{
           setOpenBackDrop(false);
-          props.history.push('/');
-          props.refresh();
+          if(props.location.pathname!=="/") props.history.push('/'); // 디테일페이지->피드
+          else props.refresh(); // 피드->피드 
       })
       .catch(error=>{
         console.log(error.response);
         setOpenBackDrop(false);
         setOpenFail(true);
         setTimeout(()=>setOpenFail(false),1000);
+        if(error.response!==undefined){
         if(error.response.status===401){
           alert("알수없는 회원정보. 로그아웃시킴");
           window.localStorage.removeItem("accessToken");
@@ -79,11 +79,15 @@ function BoardHeader(props) {
             alert('삭제 권한이 없는 사용자입니다! 피드로 돌아갑니다.')
             props.history.push("/");
         }
+        else if(error.response.status===404){
+            alert('삭제할 게시글을 찾을 수 없습니다! 피드로 돌아갑니다.')
+            props.history.push("/");
+        }
+        }
       })
   }
 
-
-  const classes = useStyles();
+  const classes = useStyles();  
     return (
         <LoggedContext.Consumer>
           {logged=>{return(
@@ -106,7 +110,7 @@ function BoardHeader(props) {
         <CardHeader className="bg-white">
              <Link to={{
                  pathname:`/${props.board.nickname}`,
-                 }} className="text-body font-weight-bold text-monospace " >
+                 }} className="text-body font-weight-bold text-monospace" >
                  {props.board.nickname}
              </Link>
              {logged.logged===false?null:

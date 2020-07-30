@@ -19,21 +19,31 @@ const useStyles = makeStyles((theme) => ({
 function Update(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [openLoad, setOpenLoad] = useState(false);
     const [openFail,setOpenFail] = useState(false);
     const [board, setBoard] = useState({});
     
     useEffect(()=>{
+        setOpenLoad(true);
         jAPI.get(`/posts/${props.match.params.boardId}`)
         .then(res=>{
+            setOpenLoad(false);
             console.log(res.data);
             setBoard(res.data);
         })
         .catch(error=>{
+            setOpenLoad(false);
+            if(error.response){
             if(error.response.status===401){
                 alert("알수없는 회원정보. 로그아웃시킴");
                 window.localStorage.removeItem("accessToken");
                 window.localStorage.removeItem("id");
                 props.history.push("/sign/in");
+            }
+            else if(error.response.status===404){
+                alert('수정할 게시글을 찾을 수 없습니다! 피드로 돌아갑니다.')
+                props.history.push("/");
+            }
             }
             console.log(error);
         })
@@ -53,9 +63,6 @@ function Update(props) {
         jAPI({
             method: 'put',
             url: `/posts/${props.match.params.boardId}`,
-            // headers: {
-            //     'Content-Type': 'multipart/form-data',
-            // },
             data: {
                 content: board.content,
                 image_url: board.image_url,
@@ -70,6 +77,8 @@ function Update(props) {
             setOpenFail(true);
             setTimeout(()=>setOpenFail(false),1000);
             console.log(error);
+
+            if(error.response!==undefined){
             if(error.response.status===401){
                 alert("알수없는 회원정보. 로그아웃시킴");
                 window.localStorage.removeItem("accessToken");
@@ -80,6 +89,11 @@ function Update(props) {
                 alert('수정 권한이 없는 사용자입니다! 피드로 돌아갑니다.')
                 props.history.push("/");
             }
+            else if(error.response.status===404){
+                alert('수정할 게시글을 찾을 수 없습니다! 피드로 돌아갑니다.')
+                props.history.push("/");
+            }
+            }   
             else {
             console.log(error);
             }
@@ -108,6 +122,12 @@ function Update(props) {
             <span>
                 <CircularProgress color="inherit" /> <br/>
                 <b>수정중 ... </b>
+            </span>
+            </Backdrop>
+            <Backdrop className={classes.backdrop} open={openLoad}>
+            <span>
+                <CircularProgress color="inherit" /> <br/>
+                <b>로딩중 ... </b>
             </span>
             </Backdrop>
             <div className="nav-bar header">

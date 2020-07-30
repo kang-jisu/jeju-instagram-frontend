@@ -57,6 +57,7 @@ function Profile(props) {
             </>
             }
             {message}
+            <button className="btn btn-info " onClick={logout}>로그아웃</button>
         </div>
 
     </Fragment>

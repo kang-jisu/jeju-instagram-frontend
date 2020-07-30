@@ -1,14 +1,13 @@
 import axios from "axios"
 
 const Api = axios.create({
-    baseURL: "http://localhost:8080/",
+    // baseURL: "http://localhost:8080/",
 })
 
 Api.interceptors.request.use(
     config => {
         if(config.url.match("posts")){
-        config.headers.common['Autorization'] = "token "+window.localStorage.getItem("accessToken");
-        // console.log(config);
+        config.headers['Authorization'] = "Bearer "+window.localStorage.getItem("accessToken");
         }
         return config;
     },
@@ -23,8 +22,7 @@ Api.interceptors.request.use(
 //     return response;
 //     },  
 //     error => {
-//     console.log(error);
-//     return Promise.reject(error);
+//     return Promise.reject(error.response);
 // });
 export default Api
 

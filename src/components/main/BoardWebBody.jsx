@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import {CardBody,CardFooter} from 'reactstrap';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
+
+import moment from 'moment';
+import 'moment/locale/ko';
 function BoardWebBody(props) {
     return (
     <Fragment>
@@ -31,7 +34,7 @@ function BoardWebBody(props) {
              </section> 
 
 
-             <Link to={`./board/${props.board.id}`} className="small mb-0 text-muted">{props.board.review_date}</Link>
+             <Link to={`./board/${props.board.id}`} className="small mb-0 text-muted">{moment(props.board.created).format("YYYY-MM-DD")}</Link>
         </CardBody>
         <CardFooter className="cardfoot"> 
             댓글 등록 기능 

@@ -54,14 +54,18 @@ function Login(props) {
             data:user
         })
         .then(res=>{
-            const data = {token:'token',nickname:'97js_'};
+            // const data = {token:'token',nickname:'97js_'};
             //login(res.data)로 바꿀것
-            login(data);
+            console.log(res.data);
+            login(res.data);
+            // login(data);
         })
         .catch(error=>{
-            if(error.response.status===400){
+            if(error.response!==undefined){
+            if(error.response.status===400||error.response.status===500){
                 // 알 수 없는 정보일 때
                 setStatus(400);
+            }
             }
             else {
                 setStatus(500);

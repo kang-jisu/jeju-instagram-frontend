@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/mock/mock.json
+/mock/*
 # dependencies
 /node_modules
 /.pnp

@@ -5,6 +5,9 @@ import {CardBody} from 'reactstrap';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
 
+import moment from 'moment';
+import 'moment/locale/ko';
+
 function BoardBody(props) {
     return (
         <CardBody className="pt-2 pb-1 border-bottom border-gray">
@@ -32,7 +35,7 @@ function BoardBody(props) {
              {/* <div className="overflow-auto comment">
                  댓글
              </div> */}
-             <Link to={`./board/${props.board.id}`} className="small mb-0 text-muted">{props.board.review_date}</Link>
+             <Link to={`./board/${props.board.id}`} className="small mb-0 text-muted">{moment(props.board.created).format("YYYY-MM-DD")}</Link>
         </CardBody>
     );
 }

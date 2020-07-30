@@ -44,33 +44,15 @@ function Insert(props) {
     }
 
     const insertForm=(e)=>{
-        // mock으로 테스트할때는 raw로
-        // const formData = new FormData();
-        // formData.append("nickname",window.localStorage.getItem("accessToken"));
-        // formData.append("content",content);
-        // for(let i=0; i<props.imagesList.length; i++){
-        //     formData.append("imagesList",imagesList[i]);
-        // }
-        // formData.append('image_url',previewList);
-        // formData.append("review_date","2020-07-30");
-        // jAPI.post("/boards",formData)
-        // .then(res=>{
-        //     console.log(String(props.imagesList.length)+content+"성공");
-        // })
-        // .catch(error=>{
-        //     console.log("실패"+error.response);
-        // })
+
         setOpen(true);
         jAPI({
             method: 'post',
             url: '/posts',
             data:{
                 content: content,
-                image_url: previewList,
-            },
-            // headers: {
-            //     'Content-Type': 'multipart/form-data',
-            // },
+                // image_url: previewList,
+            }
         })
         .then(res=>{
             setOpen(false);
@@ -80,11 +62,18 @@ function Insert(props) {
             setOpen(false);
             setOpenFail(true);
             setTimeout(()=>setOpenFail(false),1000);
+
+            if(error.response!==undefined){
             if(error.response.status===401){
                 alert("알수없는 회원정보. 로그아웃시킴");
                 window.localStorage.removeItem("accessToken");
                 window.localStorage.removeItem("id");
                 props.history.push("/sign/in");
+            }
+            else if(error.response.status===403){
+                alert('등록 권한이 없는 사용자입니다! 피드로 돌아갑니다.')
+                props.history.push("/");
+            }
             }
             else {
             console.log(error);

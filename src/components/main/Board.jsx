@@ -5,7 +5,8 @@ function Board(props) {
     return (
     <Card className="post-card" >
         <BoardHeader board={props.board} refresh={props.refresh}/>
-        {Carousel(props.board.image_url)} 
+        {/* {Carousel(props.board.image_url)}  */}
+        {Carousel([])} 
         <BoardBody board={props.board}/>        
      </Card> 
     );

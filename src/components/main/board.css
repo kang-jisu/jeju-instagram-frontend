@@ -68,6 +68,9 @@
     color:lightslategrey;text-decoration:none;
 }
 
+.card-header{
+    min-height:49px !important;
+}
 @media screen and (min-width: 601px) {
     .post-card{
         margin-bottom: 3rem;

@@ -6,7 +6,8 @@ function BoardWeb(props) {
     <Card className="post-detail-card" >
         <Row className="no-gutters">
             <Col md="8">
-                {Carousel(props.board.image_url)} 
+                {/* {Carousel(props.board.image_url)}  */}
+                {Carousel([])} 
             </Col>
             <Col md="4" className="card-detail-right">
                 <BoardHeader board={props.board}/>

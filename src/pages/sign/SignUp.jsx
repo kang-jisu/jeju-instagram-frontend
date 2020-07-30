@@ -36,13 +36,16 @@ function SignUp(props) {
             props.history.push("/sign/in");
         })
         .catch(error=>{
+            console.log(error);
+            if(error.response!==undefined){
             if(error.response.status===400){
                 // 입력되지 않은 정보가 있을 때 
                 setStatus(400);
             }
-            else if(error.response.status===404){
+            else if(error.response.status===404||error.response.status===409){
                 // 이미 존재하는 아이디 일 때
-                setStatus(404);
+                setStatus(409);
+            }
             }
             else {
                 setStatus(500);
@@ -148,7 +151,7 @@ function SignUp(props) {
             >가입하기</button>
             {status!==200?
             <p style={{color:"red"}}>
-                {status===400?"입력되지 않은 정보가 있습니다.":status===404?"이미 존재하는 이메일 혹은 닉네임입니다.":"서버와의 연결에 실패했습니다."}
+                {status===400?"입력되지 않은 정보가 있습니다.":status===409?"이미 존재하는 이메일 혹은 닉네임입니다.":"서버와의 연결에 실패했습니다."}
             </p>
             :null}
             <div className="text-center">
