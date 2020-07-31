@@ -66,7 +66,7 @@ function Main(props) {
             <input type="file" id="file" name="imagesList" accept="image/*" multiple onChange={handleFilesChange} hidden/>
             <Switch>
             <Route path="/edit" component={Edit}/>
-            <Route path="/update/:boardId" component={Update}/>
+            <Route path="/update/:boardId" render={props=>{return(<Update logged={logged}/>)}}/>
             <Route path="/insert" render={props=>{ return(<Insert imagesList={selectedFiles} successInsert={successInsert}/>)}}/>
             <Route path="/board/:boardId" component={Detail}/>
             <Route path="/:nickname" render={props=>{return(<Profile onLogout={logged.onLogout}/>)}}/>
@@ -75,6 +75,7 @@ function Main(props) {
         </section>
         <Switch>
             <Route path="/insert" component={InsertMenuBar}/>
+            <Route path="/update/:boardId" component={InsertMenuBar}/>
             <Route render={props=>{ return(<MenuBar changePage={changePage} page={page} clickAddButton={clickAddButton}/>)}}/>
         </Switch>
             </>

@@ -6,8 +6,8 @@ const WithRequestGet=(props,WrappedComponent)=>{
     const initialize=useCallback(()=>{
         jAPI.get(props.url)
         .then(res=>{
-            console.log(res.data);
-            setData(res.data.sort(function(a,b){
+            // console.log(res.data);
+            setData(res.data.filter(board=>board.user_id!==null).sort(function(a,b){
                 return parseFloat(b.post_id)-parseFloat(a.post_id);
             }));
         })

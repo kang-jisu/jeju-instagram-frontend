@@ -47,18 +47,14 @@ function Login(props) {
     }
 
     const requestLogin=()=>{
-        // axios 요청 할 부분
         jAPI({
             method:'post',
             url:'/login',
             data:user
         })
         .then(res=>{
-            // const data = {token:'token',nickname:'97js_'};
-            //login(res.data)로 바꿀것
             console.log(res.data);
             login(res.data);
-            // login(data);
         })
         .catch(error=>{
             if(error.response!==undefined){

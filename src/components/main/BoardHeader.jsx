@@ -102,10 +102,10 @@ function BoardHeader(props) {
          openBackDrop={openBackDrop}
          handleClickOpen={handleClickOpen}
          handleClose={handleClose}
-         handleUpdate={()=>handleUpdate(props.board.id)}
+         handleUpdate={()=>handleUpdate(props.board.post_id)}
          handleDeleteDialog={handleDeleteDialog}
          handleDeleteClose={handleDeleteClose}
-         handleDelete={()=>handleDelete(props.board.id)}
+         handleDelete={()=>handleDelete(props.board.post_id)}
         />
         <CardHeader className="bg-white">
              <Link to={{
@@ -113,11 +113,11 @@ function BoardHeader(props) {
                  }} className="text-body font-weight-bold text-monospace" >
                  {props.board.nickname}
              </Link>
-             {logged.logged===false?null:
+             {logged.logged===false?null:logged.id===props.board.nickname?
              <IconButton className={classes.menu} onClick={handleClickOpen}>
                 <MenuIcon />
             </IconButton>
-            }
+            :null}
         </CardHeader>
         </>
         )}}

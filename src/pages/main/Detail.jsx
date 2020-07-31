@@ -32,6 +32,7 @@ function Detail(props) {
         setOpenLoad(true);
         jAPI.get(`/posts/${props.match.params.boardId}`)
         .then(res=>{
+            console.log(res.data);
             setOpenLoad(false);
             setBoard(res.data);
         })

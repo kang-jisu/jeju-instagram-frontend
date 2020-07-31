@@ -27,9 +27,15 @@ function Update(props) {
         setOpenLoad(true);
         jAPI.get(`/posts/${props.match.params.boardId}`)
         .then(res=>{
+            if(res.data.nickname!==props.logged.id){
+                alert('수정권한이 없는 사용자입니다! 피드로 돌아갑니다.')
+                props.history.push("/");
+            }
+            else{
             setOpenLoad(false);
             console.log(res.data);
             setBoard(res.data);
+            }
         })
         .catch(error=>{
             setOpenLoad(false);
@@ -47,7 +53,7 @@ function Update(props) {
             }
             console.log(error);
         })
-    },[props.match.params.boardId,props.history]);
+    },[props.match.params.boardId,props.history,props.logged]);
 
 
     const goBack=()=>{

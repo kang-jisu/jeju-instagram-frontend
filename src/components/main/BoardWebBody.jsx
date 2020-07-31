@@ -28,13 +28,13 @@ function BoardWebBody(props) {
                  <span>
                     <FavoriteBorderRoundedIcon fontSize="large"/>
                  </span>
-                 <Link to={`./board/${props.board.id}`} className="pl-2" >
+                 <Link to={`./board/${props.board.post_id}`} className="pl-2" >
                      <TextsmsOutlinedIcon fontSize="large"/>
                  </Link>
              </section> 
 
 
-             <Link to={`./board/${props.board.id}`} className="small mb-0 text-muted">{moment(props.board.created).format("YYYY-MM-DD")}</Link>
+             <Link to={`./board/${props.board.post_id}`} className="small mb-0 text-muted">{moment(props.board.created).format("YYYY-MM-DD")}</Link>
         </CardBody>
         <CardFooter className="cardfoot"> 
             댓글 등록 기능 

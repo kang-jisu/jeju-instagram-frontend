@@ -13,9 +13,9 @@ function BoardsList(props) {
         jAPI.get("/posts")
         .then(res=>{
             console.log(res.data);
-            setBoardsList(res.data.sort(function(a,b){
+            setBoardsList(res.data.filter(board=>board.user_id!==null).sort(function(a,b){
                 return parseFloat(b.post_id)-parseFloat(a.post_id);
-            }))
+            }));
         })
         .catch(error=>{
             if(error.response!==undefined){

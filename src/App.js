@@ -23,7 +23,7 @@ function App(props) {
 
   useEffect( ()=>{
     if(window.localStorage.getItem("accessToken")){
-      console.log("app.use");
+      // console.log("app.use");
       onLogin(window.localStorage.getItem("id"));
     }
     else {

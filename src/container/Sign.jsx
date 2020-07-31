@@ -12,7 +12,7 @@ function Sign(props) {
             <Switch>
             <Route exact path="/sign/up" component={SignUp}/>
             <Route exact path="/sign/in" render={props=>{return(<Login onLogin={logged.onLogin}/>)}}/>
-            <Route path="/sign" component={Login}/>
+            <Route path="/sign" render={props=>{return(<Login onLogin={logged.onLogin}/>)}}/>
             </Switch>
         </section>
         </div>
